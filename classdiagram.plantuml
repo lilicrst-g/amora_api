@@ -1,0 +1,37 @@
+@startuml System
+    class Basket {
+        +UUID Id
+        +String Name
+        +Double Price
+        +String Description
+        +Item[] Items
+    }
+
+    class Request {
+        +UUID Id
+        +String Status
+        +DateTime RequestDate
+        +DateTime DeliveryDate
+        +Basket Basket
+        +User User
+    }
+
+    class User {
+        +UUID Id
+        +String Name
+        +String PhoneNumber
+        +String Email
+        +String Address
+    }
+
+    class Address {
+        +UUID Id
+        +String City
+        +String Neighborhood
+        +String Street
+        +String Number
+        +String Complement  
+
+    }
+
+@enduml
