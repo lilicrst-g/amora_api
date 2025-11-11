@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 public class OrderDto {
 
     private UUID id;

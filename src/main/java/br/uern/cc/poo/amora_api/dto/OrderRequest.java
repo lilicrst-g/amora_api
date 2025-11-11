@@ -7,9 +7,9 @@ import java.util.UUID;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 public class OrderRequest {
 
     @NotNull

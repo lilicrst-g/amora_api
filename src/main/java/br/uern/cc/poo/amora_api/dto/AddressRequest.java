@@ -1,9 +1,9 @@
 package br.uern.cc.poo.amora_api.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 public class AddressRequest {
 
     @NotBlank

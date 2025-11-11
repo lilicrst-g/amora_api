@@ -21,4 +21,5 @@ public class AddressController {
     public List<AddressDto> listAll() {
         return service.listAll();
     }
+
 }

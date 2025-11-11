@@ -2,9 +2,9 @@ package br.uern.cc.poo.amora_api.dto;
 
 import java.util.UUID;
 
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 public class AddressDto {
 
     private UUID id;

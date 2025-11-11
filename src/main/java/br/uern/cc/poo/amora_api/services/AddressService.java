@@ -6,6 +6,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import br.uern.cc.poo.amora_api.dto.AddressDto;
+import br.uern.cc.poo.amora_api.dto.AddressRequest;
+import br.uern.cc.poo.amora_api.entities.Address;
+import br.uern.cc.poo.amora_api.entities.User;
 import br.uern.cc.poo.amora_api.repositories.AddressRepository;
 import lombok.AllArgsConstructor;
 
@@ -22,4 +25,19 @@ public class AddressService {
                 .map(entity -> mapper.map(entity, AddressDto.class))
                 .toList();
     }
+
+    public AddressDto create(User owner, AddressRequest request) {
+        // Transformar DTO de entrada em entidade
+        var entity = mapper.map(request, Address.class);
+
+        // Atribuir usuário dono do endereço
+        entity.setOwner(owner);
+
+        // Salvar
+        var saved = repository.save(entity);
+
+        // Transformar entidade salva em DTO de saída
+        return mapper.map(saved, AddressDto.class);
+    }
+
 }

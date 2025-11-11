@@ -3,10 +3,13 @@ package br.uern.cc.poo.amora_api.controllers;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.uern.cc.poo.amora_api.dto.UserDto;
+import br.uern.cc.poo.amora_api.dto.UserRequest;
 import br.uern.cc.poo.amora_api.services.UserService;
 import lombok.AllArgsConstructor;
 
@@ -20,5 +23,10 @@ public class UserController {
     @GetMapping
     public List<UserDto> listAll() {
         return service.listAll();
+    }
+
+    @PostMapping
+    public UserDto create(@RequestBody UserRequest request) {
+        return service.create(request);
     }
 }
