@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class AddressService {
+public class AddressService { 
 
     private AddressRepository repository;
 

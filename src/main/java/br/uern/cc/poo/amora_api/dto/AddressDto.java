@@ -13,6 +13,6 @@ public class AddressDto {
     private String street;
     private String number;
     private String complement;
-    private UserDto owner;
+    private UUID ownerId;
 
 }
