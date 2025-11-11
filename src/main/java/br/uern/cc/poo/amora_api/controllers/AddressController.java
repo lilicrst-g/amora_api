@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.uern.cc.poo.amora_api.entities.Address;
+import br.uern.cc.poo.amora_api.dto.AddressDto;
 import br.uern.cc.poo.amora_api.services.AddressService;
 import lombok.AllArgsConstructor;
 
@@ -18,7 +18,7 @@ public class AddressController {
     private AddressService service;
 
     @GetMapping
-    public List<Address> listAll() {
+    public List<AddressDto> listAll() {
         return service.listAll();
     }
 }

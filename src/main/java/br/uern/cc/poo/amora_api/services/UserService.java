@@ -2,9 +2,10 @@ package br.uern.cc.poo.amora_api.services;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import br.uern.cc.poo.amora_api.entities.User;
+import br.uern.cc.poo.amora_api.dto.UserDto;
 import br.uern.cc.poo.amora_api.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 
@@ -14,7 +15,11 @@ public class UserService {
 
     private UserRepository repository;
 
-    public List<User> listAll() {
-        return repository.findAll();
+    private ModelMapper mapper;
+
+    public List<UserDto> listAll() {
+        return repository.findAll().stream()
+                .map(entity -> mapper.map(entity, UserDto.class))
+                .toList();
     }
 }

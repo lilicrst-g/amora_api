@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.uern.cc.poo.amora_api.entities.User;
+import br.uern.cc.poo.amora_api.dto.UserDto;
 import br.uern.cc.poo.amora_api.services.UserService;
 import lombok.AllArgsConstructor;
 
@@ -18,7 +18,7 @@ public class UserController {
     private UserService service;
 
     @GetMapping
-    public List<User> listAll() {
+    public List<UserDto> listAll() {
         return service.listAll();
     }
 }

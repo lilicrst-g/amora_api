@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.uern.cc.poo.amora_api.entities.Basket;
+import br.uern.cc.poo.amora_api.dto.BasketDto;
 import br.uern.cc.poo.amora_api.services.BasketService;
 import lombok.AllArgsConstructor;
 
@@ -18,7 +18,7 @@ public class BasketController {
     private BasketService service;
 
     @GetMapping
-    public List<Basket> listAll() {
+    public List<BasketDto> listAll() {
         return service.listAll();
     }
 }
