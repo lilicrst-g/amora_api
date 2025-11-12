@@ -13,7 +13,7 @@ public class OrderDto {
     private String status;
     private LocalDateTime requestDate;
     private LocalDateTime dateToDeliver;
-    private UserDto user;
+    private UUID userId;
     private List<BasketDto> baskets;
     private AddressDto address;
 

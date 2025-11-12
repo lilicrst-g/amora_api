@@ -21,4 +21,6 @@ public class OrderRequest {
 
     private UUID addressId;
 
+    private UUID userId;
+
 }

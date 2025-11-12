@@ -3,9 +3,13 @@ package br.uern.cc.poo.amora_api.services;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Service;
 
 import br.uern.cc.poo.amora_api.dto.OrderDto;
+import br.uern.cc.poo.amora_api.dto.OrderRequest;
+import br.uern.cc.poo.amora_api.entities.Basket;
+import br.uern.cc.poo.amora_api.entities.Order;
 import br.uern.cc.poo.amora_api.repositories.OrderRepository;
 import lombok.AllArgsConstructor;
 
@@ -20,6 +24,32 @@ public class OrderService {
     public List<OrderDto> listAll() {
         return repository.findAll().stream()
                 .map(entity -> mapper.map(entity, OrderDto.class))
-                .toList();        
+                .toList();
+    }
+
+    public OrderDto create(OrderRequest request) {
+        var entity = mapper
+                .addMappings(new PropertyMap<OrderRequest, Order>() {
+                    @Override
+                    protected void configure() {
+                        skip().setId(null);
+                        skip().setBaskets(null);
+                    }
+                })
+                .map(request);
+
+        var baskets = request.getBasketsIds().stream()
+                .map(id -> {
+                    var basket = new Basket();
+                    basket.setId(id);
+                    return basket;
+                })
+                .toList();
+
+        entity.setBaskets(baskets);
+
+        var saved = repository.save(entity);
+
+        return mapper.map(saved, OrderDto.class);
     }
 }
