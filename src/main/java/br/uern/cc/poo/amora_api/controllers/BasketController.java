@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 import br.uern.cc.poo.amora_api.dto.BasketDto;
 import br.uern.cc.poo.amora_api.dto.BasketRequest;
 import br.uern.cc.poo.amora_api.services.BasketService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
+@Tag(name = "Basket")
 @RestController
 @AllArgsConstructor
 @RequestMapping("baskets")
@@ -21,11 +24,13 @@ public class BasketController {
     private BasketService service;
 
     @GetMapping
+    @Operation(summary = "Listar todas as cestas do catálogo")
     public List<BasketDto> listAll() {
         return service.listAll();
     }
 
     @PostMapping
+    @Operation(summary = "Cadastrar nova cesta")
     public BasketDto create(@RequestBody BasketRequest request) {
         return service.create(request);
     }

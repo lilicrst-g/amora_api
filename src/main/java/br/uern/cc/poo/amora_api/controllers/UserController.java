@@ -16,8 +16,11 @@ import br.uern.cc.poo.amora_api.dto.AddressRequest;
 import br.uern.cc.poo.amora_api.dto.UserDto;
 import br.uern.cc.poo.amora_api.dto.UserRequest;
 import br.uern.cc.poo.amora_api.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
+@Tag(name = "User")
 @RestController
 @AllArgsConstructor
 @RequestMapping("users")
@@ -26,16 +29,19 @@ public class UserController {
     private UserService service;
 
     @GetMapping
+    @Operation(summary = "Listar todos os usuários")
     public List<UserDto> listAll() {
         return service.listAll();
     }
 
     @PostMapping
+    @Operation(summary = "Criar um novo usuário")
     public UserDto create(@RequestBody UserRequest request) {
         return service.create(request);
     }
 
     @PostMapping("{id}/addresses")
+    @Operation(summary = "Criar novo endereço vinculado ao usuário")
     public ResponseEntity<AddressDto> createAddress(@PathVariable UUID id, @RequestBody AddressRequest request) {
         // Chama o service pra cadastrar o endereço, recebe um opcional
         return service.createAddress(id, request)
@@ -48,6 +54,7 @@ public class UserController {
     }
 
     @GetMapping("{id}/addresses")
+    @Operation(summary = "Listar endereços por usuário")
     public ResponseEntity<List<AddressDto>> listAddresses(@PathVariable UUID id) {
         return ResponseEntity.ok(service.listAddresses(id));
     }
