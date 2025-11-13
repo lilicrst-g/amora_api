@@ -39,4 +39,20 @@ public class BasketService {
         return repository.findById(id)
                 .map(entity -> mapper.map(entity, BasketDto.class));
     }
+
+    public Optional<BasketDto> update(UUID id, BasketRequest request) {
+        return repository.findById(id)
+            .map(entity -> {
+                mapper.map(request, entity);
+
+            var saved = repository.save(entity);
+
+            return mapper.map(saved, BasketDto.class);
+            });
+    }
+
+    public void delete(UUID id) {
+        repository.deleteById(id);
+    }
+
 }

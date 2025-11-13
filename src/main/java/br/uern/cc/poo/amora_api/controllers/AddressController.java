@@ -4,12 +4,16 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.uern.cc.poo.amora_api.dto.AddressDto;
+import br.uern.cc.poo.amora_api.dto.AddressRequest;
 import br.uern.cc.poo.amora_api.services.AddressService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -35,6 +39,21 @@ public class AddressController {
         return service.findById(id)
                 .map(dto -> ResponseEntity.ok(dto))
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("{id}")
+    @Operation(summary = "Editar endereço")
+    public ResponseEntity<AddressDto> update(@PathVariable UUID id, @RequestBody AddressRequest request) {
+        return service.update(id, request)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("{id}")
+    @Operation(summary = "Deletar um endereço")
+    public ResponseEntity<AddressDto> delete(@PathVariable final UUID id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

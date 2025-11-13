@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import br.uern.cc.poo.amora_api.dto.AddressDto;
 import br.uern.cc.poo.amora_api.dto.AddressRequest;
+import br.uern.cc.poo.amora_api.dto.UserDto;
+import br.uern.cc.poo.amora_api.dto.UserRequest;
 import br.uern.cc.poo.amora_api.entities.Address;
 import br.uern.cc.poo.amora_api.entities.User;
 import br.uern.cc.poo.amora_api.repositories.AddressRepository;
@@ -45,6 +47,21 @@ public class AddressService {
     public Optional<AddressDto> findById(UUID id) {
         return repository.findById(id)
                 .map(entity -> mapper.map(entity, AddressDto.class));
+    }
+
+    public Optional<AddressDto> update(UUID id, AddressRequest request) {
+        return repository.findById(id)
+            .map(entity -> {
+                mapper.map(request, entity);
+
+            var saved = repository.save(entity);
+
+            return mapper.map(saved, AddressDto.class);
+            });
+    }
+
+    public void delete(UUID id) {
+        repository.deleteById(id);
     }
 
 }

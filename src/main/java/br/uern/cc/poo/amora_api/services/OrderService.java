@@ -60,4 +60,7 @@ public class OrderService {
                 .map(entity -> mapper.map(entity, OrderDto.class));
     }
 
+    public void delete(UUID id) {
+        repository.deleteById(id);
+    }
 }

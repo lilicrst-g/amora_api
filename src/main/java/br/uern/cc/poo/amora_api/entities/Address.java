@@ -3,6 +3,8 @@ package br.uern.cc.poo.amora_api.entities;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.annotations.SoftDelete;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +18,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "addresses")
+@SoftDelete
 public class Address {
 
     @Id

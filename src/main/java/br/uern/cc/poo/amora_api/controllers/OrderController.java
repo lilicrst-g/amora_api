@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +45,13 @@ public class OrderController {
         return service.findById(id)
                 .map(dto -> ResponseEntity.ok(dto))
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("{id}")
+    @Operation(summary = "Deletar o pedido")
+    public ResponseEntity<OrderDto> delete(@PathVariable final UUID id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

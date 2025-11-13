@@ -3,6 +3,10 @@ package br.uern.cc.poo.amora_api.entities;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SoftDelete;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +19,8 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "users")
+@SoftDelete
+@DynamicUpdate
 public class User {
 
     @Id
@@ -30,7 +36,7 @@ public class User {
     @Column
     private String email;
     
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Address> address;
 
     @OneToMany(mappedBy = "user")

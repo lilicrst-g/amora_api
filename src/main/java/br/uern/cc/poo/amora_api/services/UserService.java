@@ -48,6 +48,22 @@ public class UserService {
                 .map(entity -> mapper.map(entity, UserDto.class));
     }
 
+    public Optional<UserDto> update(UUID id, UserRequest request) {
+        return repository.findById(id)
+            .map(entity -> {
+                mapper.map(request, entity);
+
+            var saved = repository.save(entity);
+
+            return mapper.map(saved, UserDto.class);
+            });
+    }
+
+    public void delete(UUID id) {
+        repository.deleteById(id);
+        // deletar endereços desse usuário
+    }
+
     public List<AddressDto> listAddresses(UUID id) {
         return repository.findById(id)
                 .map(user -> user.getAddress().stream()
