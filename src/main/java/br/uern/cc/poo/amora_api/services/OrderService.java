@@ -1,6 +1,8 @@
 package br.uern.cc.poo.amora_api.services;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
@@ -52,4 +54,10 @@ public class OrderService {
 
         return mapper.map(saved, OrderDto.class);
     }
+
+    public Optional<OrderDto> findById(UUID id) {
+        return repository.findById(id)
+                .map(entity -> mapper.map(entity, OrderDto.class));
+    }
+
 }

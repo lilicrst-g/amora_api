@@ -40,6 +40,14 @@ public class UserController {
         return service.create(request);
     }
 
+    @GetMapping("{id}")
+    @Operation(summary = "Buscar um usuário pelo id")
+    public ResponseEntity<UserDto> findById(@PathVariable UUID id) {
+        return service.findById(id)
+                .map(dto -> ResponseEntity.ok(dto))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PostMapping("{id}/addresses")
     @Operation(summary = "Criar novo endereço vinculado ao usuário")
     public ResponseEntity<AddressDto> createAddress(@PathVariable UUID id, @RequestBody AddressRequest request) {

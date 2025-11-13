@@ -1,6 +1,8 @@
 package br.uern.cc.poo.amora_api.services;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -33,4 +35,8 @@ public class BasketService {
         return mapper.map(saved, BasketDto.class);
     }
 
+    public Optional<BasketDto> findById(UUID id) {
+        return repository.findById(id)
+                .map(entity -> mapper.map(entity, BasketDto.class));
+    }
 }

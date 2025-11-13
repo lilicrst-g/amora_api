@@ -1,6 +1,8 @@
 package br.uern.cc.poo.amora_api.services;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,7 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class AddressService { 
+public class AddressService {
 
     private AddressRepository repository;
 
@@ -38,6 +40,11 @@ public class AddressService {
 
         // Transformar entidade salva em DTO de saída
         return mapper.map(saved, AddressDto.class);
+    }
+
+    public Optional<AddressDto> findById(UUID id) {
+        return repository.findById(id)
+                .map(entity -> mapper.map(entity, AddressDto.class));
     }
 
 }

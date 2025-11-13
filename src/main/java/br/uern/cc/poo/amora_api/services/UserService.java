@@ -43,6 +43,11 @@ public class UserService {
         return mapper.map(saved, UserDto.class);
     }
 
+    public Optional<UserDto> findById(UUID id) {
+        return repository.findById(id)
+                .map(entity -> mapper.map(entity, UserDto.class));
+    }
+
     public List<AddressDto> listAddresses(UUID id) {
         return repository.findById(id)
                 .map(user -> user.getAddress().stream()
