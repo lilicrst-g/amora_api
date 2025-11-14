@@ -9,6 +9,13 @@ public class ModelMapperConfig {
 
     @Bean
     public ModelMapper modelMapper() {
-        return new ModelMapper();
+        // Criar objeto
+        final var modelMapper = new ModelMapper();
+
+        // Configurar
+        modelMapper.getConfiguration()
+                .setSkipNullEnabled(true);
+
+        return modelMapper;
     }
 }

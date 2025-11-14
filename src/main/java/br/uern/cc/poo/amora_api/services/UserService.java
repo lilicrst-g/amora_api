@@ -50,13 +50,13 @@ public class UserService {
 
     public Optional<UserDto> update(UUID id, UserRequest request) {
         return repository.findById(id)
-            .map(entity -> {
-                mapper.map(request, entity);
+                .map(entity -> {
+                    mapper.map(request, entity);
 
-            var saved = repository.save(entity);
+                    var saved = repository.save(entity);
 
-            return mapper.map(saved, UserDto.class);
-            });
+                    return mapper.map(saved, UserDto.class);
+                });
     }
 
     public void delete(UUID id) {
