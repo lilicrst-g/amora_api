@@ -1,5 +1,6 @@
 package br.uern.cc.poo.amora_api.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -37,7 +38,7 @@ public class OrderService {
                         skip().setId(null);
                         skip().setBaskets(null);
                     }
-                })
+                })                
                 .map(request);
 
         var baskets = request.getBasketsIds().stream()
@@ -49,6 +50,8 @@ public class OrderService {
                 .toList();
 
         entity.setBaskets(baskets);
+
+        entity.setRequestDate(LocalDateTime.now());
 
         var saved = repository.save(entity);
 
