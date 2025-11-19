@@ -33,6 +33,9 @@ public class Basket {
     @Column(nullable = false)
     private String description;
 
+    @Column
+    private String photoId;
+
     @ManyToMany(mappedBy = "baskets")
     private List<Order> orders;
 
