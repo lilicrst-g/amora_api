@@ -1,0 +1,212 @@
+{
+    "id": "jaofe",
+    "intro": {
+        "type": "INTRO",
+        "text": "Seja bem vindo ao asistente virtual da Amora.\n",
+        "jump": "option:/start"
+    },
+    "options": [
+        {
+            "text": "Deseja iniciar um atendimento?\n",
+            "id": "/start",
+            "type": "OPTION",
+            "list": [
+                {
+                    "id": "1",
+                    "text": "Sim.\n",
+                    "onSelect": {
+                        "jump": "option:/branch"
+                    }
+                },
+                {
+                    "id": "2",
+                    "text": "Não.\n",
+                    "onSelect": {
+                        "jump": "info:/exit"
+                    }
+                }
+            ]
+        },
+        {
+            "text": "O que você gostaria de fazer?\n",
+            "id": "/branch",
+            "type": "OPTION",
+            "list": [
+                {
+                    "id": "1",
+                    "text": "Ver as cestas disponíveis.\n",
+                    "comments": "Ver as cestas disponíveis.",
+                    "onSelect": {
+                        "jump": "option:/listarCestas"
+                    }
+                },
+                {
+                    "id": "2",
+                    "text": "Fazer um pedido.\n",
+                    "comments": "Fazer um pedido.",
+                    "onSelect": {
+                        "jump": "form:/cadUsuario"
+                    }
+                },
+                {
+                    "id": "3",
+                    "text": "Finalizar Atendimento.\n",
+                    "onSelct": {
+                        "jump": "info:/exit"
+                    }
+                }
+            ]
+        },
+        {
+            "text": "Como gostaria da entrega?\n",
+            "id": "/entrega",
+            "type": "OPTION",
+            "list": [
+                {
+                    "id": "1",
+                    "text": "Retirada no local.\n",
+                    "comments": "Retirada.",
+                    "onSelect": {
+                        "jump": "option:/confirmacao"
+                    }
+                },
+                {
+                    "id": "2",
+                    "text": "Entrega (taxa extra de acordo com o endereço).\n",
+                    "comments": "Entrega.",
+                    "onSelect": {
+                        "jump": "form:/cadEndereco"
+                    }
+                }
+            ]
+        }
+    ],
+    "forms": [
+        {
+            "id": "/cadUsuario",
+            "text": "Para criarmos o pedido, informe os dados solicitados a seguir.\n",
+            "type": "FORM",
+            "list": [
+                {
+                    "id": "name",
+                    "text": "Para dar prosseguimento ao atendimento, informe o seu nome.\n",
+                    "format": "text"
+                },
+                {
+                    "id": "phoneNumber",
+                    "text": "Para dar prosseguimento ao atendimento, informe seu número de telefone.\n",
+                    "format": "text"
+                },
+                {
+                    "id": "email",
+                    "text": "Informe seu endereço de e-mail.\n",
+                    "format": "text"
+                }
+            ],
+            "submit": {
+                "listAtt": [
+                    "name",
+                    "phoneNumber",
+                    "email"
+                ],
+                "route": "/jaofe/cadUsuario",
+                "jump": "form:/escolherCesta"
+            }
+        },
+        {
+            "id": "/escolherCesta",
+            "text": "Agora vamos incluir os produtos do pedido.",
+            "type": "FORM",
+            "list": [
+                {
+                    "id": "basket",
+                    "text": "Digite o número da cesta que você deseja incluir:\n1 - Bom dia\n2 - Amora\n3 - Premium",
+                    "format": "text"
+                },
+                {
+                    "id": "quantity",
+                    "text": "Quantas?",
+                    "format": "text"                    
+                },
+                {
+                    "id": "date",
+                    "text": "Escolha a data que deseja.",
+                    "format": "text"
+                }
+            ],
+            "submit": {
+                "listAtt": [
+                    "basket",
+                    "quantity",
+                    "date"               
+                ],
+                "route": "/jaofe/escolherCesta",
+                "jump": "option:/entrega"
+            }            
+        },
+        {
+            "id": "/cadEndereco",
+            "text": "Informe os dados solicitados a seguir para realizarmos a entrega.\n",
+            "type": "FORM",
+            "list": [
+                {
+                    "id": "city",
+                    "text": "Cidade\n",
+                    "format": "text"
+                },
+                {
+                    "id": "neighborhood",
+                    "text": "Bairro\n",
+                    "format": "text"
+                },
+                {
+                    "id": "street",
+                    "text": "Rua ou logradouro\n",
+                    "format": "text"
+                },
+                {
+                    "id": "number",
+                    "text": "Número da casa\n",
+                    "format": "text"
+                },
+                {
+                    "id": "complement",
+                    "text": "Complemento\n",
+                    "format": "text"
+                }
+            ],
+            "submit": {
+                "listAtt": [
+                    "city",
+                    "neighborhood",
+                    "street",
+                    "number",
+                    "complement"
+                ],
+                "route": "/jaofe/cadEndereco",
+                "jump": "form:/confirmacao"
+            }
+        }
+    ],
+    "info": [
+        {
+            "text": "Atendimento encerrado.",
+            "id": "/exit",
+            "type": "INFO",
+            "exit": true
+        },
+        {
+            "text": "O Processo foi criado com sucesso. ",
+            "id": "/confirmacao",
+            "type": "INFO",
+            "exit": true,
+            "prepare": {
+                "listAtt": [],
+                "content": {
+                    "id": "confirmacaoId"
+                },
+                "route": "/basemed/agendamento"
+            }
+        }
+    ]
+}
