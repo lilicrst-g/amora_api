@@ -1,43 +1,65 @@
 @startuml System
-    class Basket {
-        +UUID Id
-        +String Name
-        +Double Price
-        +String Description
-        +Item[] Items
-        +String photoId
-        
-    }
+!define ER_ENTITY(name) class name
 
-    class Order {
-        +UUID Id
-        +String Status
-        +DateTime RequestDate
-        +DateTime DeliveryDate
-        +Basket Basket
-        +User User
-    }
 
-    class User {
-        +UUID Id
-        +String Name
-        +String PhoneNumber
-        +String Email
-        +String Address
-    }
+ER_ENTITY(User)
+class User {
+    + PK id : UUID
+    --
+    name : String
+    phoneNumber : String
+    email : String
+}
 
-    class Address {
-        +UUID Id
-        +String City
-        +String Neighborhood
-        +String Street
-        +String Number
-        +String Complement  
+ER_ENTITY(Address)
+class Address {
+    + PK id : UUID
+    --
+    city : String
+    neighborhood : String
+    street : String
+    number : String
+    complement : String
+    --
+    FK owner_id : UUID
+}
 
-    }
+ER_ENTITY(Order)
+class Order {
+    + PK id : UUID
+    --
+    status : String
+    requestDate : LocalDateTime
+    dateToDeliver : LocalDateTime
+    --
+    FK user_id : UUID
+    FK address_id : UUID
+}
 
-    User <|-- Address
-    Order --> Basket
-    User <|-- Order
+ER_ENTITY(Basket)
+class Basket {
+    + PK id : UUID
+    --
+    name : String
+    price : Double
+    description : String
+    photoId : String
+}
+
+ER_ENTITY(Order_Basket)
+class Order_Basket {
+    + PK order_id : UUID
+    + PK basket_id : UUID
+}
+
+
+
+User ||--o{ Address : owns
+User ||--o{ Order : places
+
+Address ||--o{ Order : delivery_place
+
+Order ||--o{ Order_Basket : contains >
+Basket ||--o{ Order_Basket : part_of >
 
 @enduml
