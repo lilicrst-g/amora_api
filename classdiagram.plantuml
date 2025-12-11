@@ -5,9 +5,11 @@
         +Double Price
         +String Description
         +Item[] Items
+        +String photoId
+        
     }
 
-    class Request {
+    class Order {
         +UUID Id
         +String Status
         +DateTime RequestDate
@@ -33,5 +35,9 @@
         +String Complement  
 
     }
+
+    User <|-- Address
+    Order --> Basket
+    User <|-- Order
 
 @enduml
