@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import br.uern.cc.poo.amora_api.dto.AddressDto;
 import br.uern.cc.poo.amora_api.dto.AddressRequest;
-import br.uern.cc.poo.amora_api.dto.UserDto;
-import br.uern.cc.poo.amora_api.dto.UserRequest;
 import br.uern.cc.poo.amora_api.entities.Address;
 import br.uern.cc.poo.amora_api.entities.User;
 import br.uern.cc.poo.amora_api.repositories.AddressRepository;

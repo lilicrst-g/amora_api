@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.uern.cc.poo.amora_api.dto.BasketDto;
 import br.uern.cc.poo.amora_api.dto.BasketRequest;
-import br.uern.cc.poo.amora_api.dto.UserDto;
-import br.uern.cc.poo.amora_api.dto.UserRequest;
 import br.uern.cc.poo.amora_api.services.BasketService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -46,7 +44,7 @@ public class BasketController {
     @Operation(summary = "Buscar uma cesta pelo id")
     public ResponseEntity<BasketDto> findById(@PathVariable UUID id) {
         return service.findById(id)
-                .map(dto -> ResponseEntity.ok(dto))
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
